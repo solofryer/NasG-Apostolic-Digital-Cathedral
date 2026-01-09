@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NasG Roma Masterclass | Digital Basilica</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@300;600&family=Lora:ital,wght@0,400;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* SYSTEM STYLING BY NASG
+           VERSION: 2.0.0 (Apostolic Edition)
+        */
+        :root {
+            --gold: #d4af37;
+            --deep-blue: #020617;
+            --soft-white: #f1f5f9;
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--deep-blue); color: var(--soft-white); font-family: 'Lora', serif; overflow-x: hidden; }
+
+        /* SACRED BACKGROUND ENGINE */
+        #sacred-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .sacred-cross { position: absolute; color: var(--gold); opacity: 0.12; animation: floatUp 25s linear infinite; }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotateX(0deg); opacity: 0; }
+            15% { opacity: 0.2; }
+            85% { opacity: 0.2; }
+            100% { transform: translateY(-20vh) rotateX(360deg); opacity: 0; }
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .nav-logo { font-family: 'Cinzel Decorative'; font-size: 1.5rem; color: var(--gold); letter-spacing: 4px; }
+        .nav-info { font-family: 'Outfit'; color: var(--gold); font-size: 0.9rem; text-transform: uppercase; }
+
+        /* HERO AREA */
+        header {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 20px;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+        }
+        .badge { border: 1px solid var(--gold); padding: 5px 25px; border-radius: 50px; color: var(--gold); font-family: 'Outfit'; margin-bottom: 25px; font-weight: 600; letter-spacing: 2px; }
+        header h1 { font-family: 'Cinzel Decorative'; font-size: clamp(2.5rem, 8vw, 6rem); color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 50px rgba(212,175,55,0.3); }
+        .hero-desc { max-width: 800px; font-size: 1.3rem; line-height: 1.8; color: #94a3b8; }
+
+        /* DASHBOARD GRID */
+        .container { max-width: 1400px; margin: -80px auto 100px; padding: 0 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card {
+            background: var(--glass); backdrop-filter: blur(25px); border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 50px; padding: 80px 45px; text-align: center; cursor: pointer; transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-30px); border-color: var(--gold); box-shadow: 0 50px 100px rgba(0,0,0,0.9); }
+        .card i { font-size: 4rem; color: var(--gold); margin-bottom: 30px; }
+        .card h3 { font-family: 'Cinzel Decorative'; font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; }
+
+        /* DEEP CONTENT OVERLAY */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #020617; z-index: 10000; display: none; overflow-y: auto;
+            padding: 100px 30px; animation: scaleIn 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(1.1); } to { opacity: 1; transform: scale(1); } }
+        .close-btn { position: fixed; top: 40px; right: 40px; background: var(--gold); width: 65px; height: 65px; border-radius: 50%; color: black; display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer; z-index: 10001; }
+
+        /* CONTENT STYLING */
+        .article { max-width: 1000px; margin: 0 auto; padding-bottom: 100px; }
+        .article h1 { font-family: 'Cinzel Decorative'; color: var(--gold); text-align: center; font-size: 3.5rem; margin-bottom: 60px; }
+        .holy-section { background: rgba(255, 255, 255, 0.02); padding: 50px; border-radius: 40px; border-left: 10px solid var(--gold); margin-bottom: 50px; }
+        .holy-section h2 { font-family: 'Cinzel Decorative'; color: var(--gold); margin-bottom: 25px; font-size: 2rem; border-bottom: 1px solid rgba(212,175,55,0.2); display: inline-block; }
+        .holy-section p { font-size: 1.35rem; line-height: 2.3; color: #cbd5e1; text-align: justify; margin-bottom: 20px; }
+        .holy-section ul { margin-left: 25px; color: var(--gold-light); }
+        .holy-section li { margin-bottom: 15px; font-size: 1.2rem; list-style-type: square; }
+
+        /* FOOTER & CONTACT */
+        footer { padding: 100px 50px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        .wa-float { position: fixed; bottom: 45px; right: 45px; background: #25d366; width: 75px; height: 75px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white; text-decoration: none; box-shadow: 0 15px 45px rgba(0,0,0,0.6); z-index: 999; }
+    </style>
+</head>
+<body>
+
+    <div id="sacred-particles"></div>
+
+    <nav>
+        <div class="nav-logo">NASG ACADEMY</div>
+        <div class="nav-info">Kiongozi wa Huduma: VICK</div>
+    </nav>
+
+    <header>
+        <div class="badge">SYSTEM ARCHITECT: NASG</div>
+        <h1>Basilica Kuu</h1>
+        <p class="hero-desc">Karibu katika kitovu cha mafundisho ya imani, mapokeo ya mitume, na maisha ya kiroho chini ya mwavuli wa Kanisa la Roma.</p>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <div class="card" onclick="show('kuhusu')"><i class="fas fa-history"></i><h3>Historia ya Roma</h3><p>Kuanzia Mt. Petro hadi Papa Fransisko.</p></div>
+            <div class="card" onclick="show('sakramenti')"><i class="fas fa-dove"></i><h3>Sakramenti 7</h3><p>Njia za uhakika za kupokea neema.</p></div>
+            <div class="card" onclick="show('misa')"><i class="fas fa-fire-alt"></i><h3>Misa Takatifu</h3><p>Kafara inayohuisha roho zetu.</p></div>
+            <div class="card" onclick="show('sala')"><i class="fas fa-pray"></i><h3>Sala & Rozari</h3><p>Mazungumzo matakatifu na Mungu.</p></div>
+            <div class="card" onclick="show('imani')"><i class="fas fa-scroll"></i><h3>Mafundisho</h3><p>Katekisimu na Amri 10 za Mungu.</p></div>
+            <div class="card" onclick="show('watakatifu')"><i class="fas fa-innocent"></i><h3>Watakatifu</h3><p>Mifano ya picha na maisha bora.</p></div>
+            <div class="card" onclick="show('biblia')"><i class="fas fa-book-bible"></i><h3>Biblia Takatifu</h3><p>Neno la Mungu na Mapokeo.</p></div>
+            <div class="card" onclick="show('vick')"><i class="fas fa-phone-alt"></i><h3>Vick: Mawasiliano</h3><p>Huduma na Maombi ya Sala.</p></div>
+        </div>
+    </div>
+
+    <div id="basilicaOverlay" class="overlay">
+        <div class="close-btn" onclick="hide()"><i class="fas fa-times"></i></div>
+        <div id="overlayBody" class="article"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Digital Basilica. Imeundwa na <strong>NasG</strong>.</p>
+        <p style="color: var(--gold); margin-top: 15px;">Msimamizi wa Maadili: VICK | System Architect: NASG</p>
+    </footer>
+
+    <a href="https://wa.link/rwi0cs" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // BACKGROUND ANIMATION
+        const particles = document.getElementById('sacred-particles');
+        for (let i = 0; i < 40; i++) {
+            const cross = document.createElement('i');
+            cross.className = 'fas fa-cross sacred-cross';
+            cross.style.left = Math.random() * 100 + 'vw';
+            cross.style.animationDuration = (Math.random() * 15 + 15) + 's';
+            cross.style.animationDelay = (Math.random() * 10) + 's';
+            particles.appendChild(cross);
+        }
+
+        // DEEP DATABASE
+        const db = {
+            kuhusu: `<h1>Historia ya Kanisa la Roma</h1>
+                <div class="holy-section">
+                    <h2>Chimbuko la Mitume</h2>
+                    <p>Kanisa Katoliki lilianzishwa na Yesu Kristo mwenyewe, ambaye alimkabidhi Mtume Petro "funguo za ufalme wa mbinguni" (Mathayo 16:19). Tangu kifo cha Petro huko Roma mnamo mwaka 64 BK, mji huu umekuwa kiti cha mamlaka ya kikristo duniani. Kanisa limepita katika vipingamizi vingi, kuanzia mateso ya dola ya Kirumi hadi nyakati za mageuzi, likibaki kuwa taasisi imara zaidi duniani.</p>
+                </div>
+                <div class="holy-section">
+                    <h2>Nafasi ya Baba Mtakatifu</h2>
+                    <p>Papa si kiongozi wa kisiasa tu, bali ni mfuasi wa Mtakatifu Petro. Yeye ni Askofu wa Roma na mchungaji wa ulimwengu. Mamlaka yake yanatokana na Mapokeo ya Mitume na Biblia, akihakikisha kuwa imani inabaki kuwa moja na takatifu.</p>
+                </div>`,
+            
+            sakramenti: `<h1>Sakramenti Saba Takatifu</h1>
+                <div class="holy-section">
+                    <h2>Njia za Neema</h2>
+                    <p>Sakramenti ni ishara za nje zilizowekwa na Kristo ili kutupatia neema za ndani. Kanisa Katoliki linafundisha sakramenti saba ambazo hugusa maisha yote ya mwanadamu:</p>
+                    <ul>
+                        <li><strong>Ubatizo:</strong> Huondoa dhambi ya asili na kutufanya kuwa wana wa Mungu.</li>
+                        <li><strong>Kipaimara:</strong> Huthibitisha imani yetu kwa nguvu ya Roho Mtakatifu.</li>
+                        <li><strong>Ekaristi:</strong> Chakula cha uzima (Mwili na Damu ya Kristo).</li>
+                        <li><strong>Kitubio:</strong> Msamaha wa dhambi baada ya ubatizo kupitia ungamo.</li>
+                        <li><strong>Mpako wa Wagonjwa:</strong> Uponyaji wa kiroho na kimwili kwa wagonjwa.</li>
+                        <li><strong>Daraja Takatifu:</strong> Kwa ajili ya huduma ya Mapadre na Maaskofu.</li>
+                        <li><strong>Ndoa:</strong> Muungano mtakatifu kati ya mume na mke.</li>
+                    </ul>
+                </div>`,
+
+            misa: `<h1>Maana ya Misa Takatifu</h1>
+                <div class="holy-section">
+                    <h2>Kafara Isiyo na Damu</h2>
+                    <p>Misa Takatifu ni moyo wa maisha ya Kanisa. Ni ukumbusho na uwepo wa kweli wa kafara ya Kristo msalabani. Kila Misa ni muunganiko kati ya mbingu na dunia ambapo malaika na watakatifu wanajiunga nasi kumwabudu Mungu.</p>
+                </div>
+                <div class="holy-section">
+                    <h2>Sehemu Kuu za Misa</h2>
+                    <p>Misa imegawanyika katika Liturujia ya Neno (Kusikiliza Maandiko) na Liturujia ya Ekaristi (Tendo la kugeuza na kupokea Komunyo). Waamini wanahimizwa kuhudhuria kwa unyenyekevu na utulivu mkuu.</p>
+                </div>`,
+
+            vick: `<h1>Mawasiliano na Maombi</h1>
+                <div class="holy-section">
+                    <h2>Msimamizi: Vick</h2>
+                    <p>Kiongozi Vick anashughulikia masuala yote ya mawasiliano ya waamini, maombi ya sala, na baraka za kiroho kupitia mfumo huu wa NasG Roma. Ikiwa unahitaji kuelekezwa katika safari yako ya imani, usisite kuwasiliana nasi.</p>
+                    <p><strong>Simu (WA):</strong> +255 673 114 040 (Vick)<br><strong>Email:</strong> fryersolo@gmail.com</p>
+                </div>
+                <div class="holy-section">
+                    <h2>Architect Note by NasG</h2>
+                    <p>Mfumo huu umejengwa kwa ajili ya kudumu. Ikiwa wewe ni muumini unayetafuta ukweli, tumia maktaba hii kukuza roho yako.</p>
+                </div>`,
+
+            imani: `<h1>Mafundisho na Maadili</h1>
+                <div class="holy-section">
+                    <h2>Amri 10 za Mungu</h2>
+                    <p>Hizi ni dira ya kimaadili tuliyopewa kupitia Musa na kukamilishwa na Yesu. Zinatufundisha kumpenda Mungu kwa moyo wote na kumpenda jirani kama tunavyojipenda wenyewe. Kuishi amri hizi ni kielelezo cha uhuru wa kweli.</p>
+                </div>`,
+
+            watakatifu: `<h1>Watakatifu na Picha Takatifu</h1>
+                <div class="holy-section">
+                    <h2>Ushirika wa Watakatifu</h2>
+                    <p>Kanisa Katoliki linaheshimu watakatifu si kama miungu, bali kama marafiki wa Mungu waliotangulia mbinguni. Picha zao zinatukumbusha maisha yao ya kishujaa. Bikira Maria, Mama wa Mungu, anashika nafasi ya kwanza miongoni mwao kama mwombezi wetu mkuu.</p>
+                </div>`
+        };
+
+        function show(id) {
+            document.getElementById('overlayBody').innerHTML = db[id] || "<h1>Coming Soon</h1><p>Maelekezo yanatayarishwa na NasG.</p>";
+            document.getElementById('basilicaOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hide() {
+            document.getElementById('basilicaOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
